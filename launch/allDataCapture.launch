@@ -1,0 +1,25 @@
+<launch>
+  <machine name = "gstation" address = "192.168.1.140" />
+  <machine name = "companion" address = "192.168.1.163" env-loader = "/opt/ros/melodic/custom_env.sh"/>
+  
+  <node name = "tf_mini_node" pkg = "sensor_module_ros" type = "tf_mini_node" output = "screen" >
+  <!-- <node machine = "companion" name = "tf_mini_node" pkg = "sensor_module_ros" type = "tf_mini_node" output = "screen" > -->
+    <!--PC上设置USB0，Jetson Nano J41Pin UART为THS1-->>
+    <param name="serial_port" type="string" value="/dev/ttyTHS1" />
+    <param name="baud_rate" type="int" value="115200" />
+    <param name="pub_rate" type="int" value="200"/>
+  </node>
+
+  <node name = "indemind_vi_node" pkg = "sensor_module_ros" type = "indemind_vi_node" output = "screen">
+  <!-- <node machine = "companion" name = "indemind_vi_node" pkg = "sensor_module_ros" type = "indemind_vi_node" output = "screen"> -->
+    <param name = "img_width" type = "int" value = "640" />
+    <param name = "img_height" type = "int" value = "400" />
+    <!--FPS只能取25， 50， 100， 200-->
+    <param name = "img_freq" type = "int" value = "50" />
+    <!--IMU频率需能被1000整除，否则会就近取整 -->
+    <param name = "imu_freq" type = "int" value = "200" />
+  </node>
+
+  <!-- <node machine = "gstation" name = "record_node" pkg = "sensor_module_ros" type = "record_node" output = "screen" /> -->
+  
+</launch>

@@ -1,0 +1,5 @@
+<launch>
+
+  <node name = "record_node" pkg = "sensor_module_ros" type = "record_node" output = "screen" />
+  
+</launch>
